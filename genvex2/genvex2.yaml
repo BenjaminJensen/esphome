@@ -1,0 +1,81 @@
+esphome:
+  name: genvex-2
+
+  includes:
+  - rpm_hw_sensor.h
+  - fan_speed.h
+
+esp32:
+  board: esp-wrover-kit
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "89StKipZtoevvy8i/ocFmAgzjltyodL4uQH2RrOfEVQ="
+
+ota:
+  password: "Benster101!"
+
+wifi:
+  ssid: "Boing"
+  password: "benster101"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Genvex-2 Fallback Hotspot"
+    password: "FhIltHcpNB7T"
+
+captive_portal:
+
+sensor:
+  - platform: custom
+    lambda: |-
+      auto rpm = new RPMHWSensor();
+      App.register_component(rpm);
+      return {rpm->rpm1, rpm->rpm2};
+
+    sensors:
+    - name: "RPM 1"
+      unit_of_measurement: RPM
+      accuracy_decimals: 0
+      icon: "mdi:fan"
+    - name: "RPM 2"
+      unit_of_measurement: RPM
+      accuracy_decimals: 0
+      icon: "mdi:fan"
+
+switch:
+  - platform: gpio
+    name: "Fan Power Relay"
+    pin: 
+      number: 2
+      inverted: true
+    icon: "mdi:power-cycle"
+  - platform: gpio
+    name: "Rotor Relay"
+    pin: 
+      number: 4
+      inverted: true
+    icon: "mdi:reload"
+
+output:
+- platform: custom
+  type: float
+  lambda: |-
+    auto fan_output = new FanSpeedOutput();
+    App.register_component(fan_output);
+    return {fan_output};
+
+  outputs:
+    id: fan_speed_output
+
+fan:
+  - platform: speed
+    output: fan_speed_output
+    name: "LVAR75"
+    speed_count: 5
