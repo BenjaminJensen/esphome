@@ -3,7 +3,6 @@ esphome:
 
   includes:
   - rpm_hw_sensor.h
-  - fan_speed.h
 
 esp32:
   board: esp-wrover-kit
@@ -70,21 +69,11 @@ switch:
     icon: "mdi:reload"
 
 output:
-- platform: custom
-  type: float
-  lambda: |-
-    auto fan_output = new FanSpeedOutput();
-    App.register_component(fan_output);
-    return {fan_output};
-
-  outputs:
-    id: fan_speed_output
-
 - platform: float_relay_ladder
   id: float_relay_ladder_1
 
 fan:
   - platform: speed
-    output: fan_speed_output
+    output: float_relay_ladder_1
     name: "LVAR75"
     speed_count: 5
