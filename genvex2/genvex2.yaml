@@ -10,6 +10,12 @@ esp32:
   framework:
     type: esp-idf
 
+# Include external components
+external_components:
+  - source:
+      type: local
+      path: D:/git/esphome/components
+
 # Enable logging
 logger:
 
@@ -73,6 +79,9 @@ output:
 
   outputs:
     id: fan_speed_output
+
+- platform: float_relay_ladder
+  id: float_relay_ladder_1
 
 fan:
   - platform: speed
