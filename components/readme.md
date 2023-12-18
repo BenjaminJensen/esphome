@@ -1,0 +1,2 @@
+# Collection of custom components used in my home
+Thanks to jesserockz for inspiration on his ["Empty External Components"](https://github.com/jesserockz/esphome-external-component-examples/tree/master) repo.
