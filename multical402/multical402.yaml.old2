@@ -1,0 +1,29 @@
+esphome:
+  name: multical402
+
+esp32:
+  board: esp-wrover-kit
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "Benster101!"
+
+ota:
+  password: "Benster101!"
+
+wifi:
+  ssid: "Boing"
+  password: "benster101"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Multical402 Fallback Hotspot"
+    password: "QiMsrDaVvS8h"
+
+captive_portal:
+    

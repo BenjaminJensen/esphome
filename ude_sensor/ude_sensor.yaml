@@ -1,0 +1,56 @@
+esphome:
+  name: ude-sensor
+  friendly_name: Ude Sensor
+    
+esp32:
+  board: esp-wrover-kit
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "Ur45aOZK9BFZdNc6RcE3bdrSfbZxkgF1UOmmmItLd+s="
+
+ota:
+  password: "Benster101!"
+
+wifi:
+  ssid: "Boing"
+  password: "benster101"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Ude Sensor Fallback Hotspot"
+    password: "7t6uqQRqfK1q"
+
+captive_portal:
+
+# Example configuration entry for ESP32
+i2c:
+  sda: 21
+  scl: 22
+  scan: false
+  id: bus_a
+
+sensor:
+  - platform: bme280
+    i2c_id: bus_a
+    temperature:
+      name: "Ude Temperature"
+      oversampling: 16x
+    pressure:
+      name: "Ude Pressure"
+    humidity:
+      name: "Ude Humidity"
+    address: 0x76
+    update_interval: 60s
+
+binary_sensor:
+  - platform: gpio
+    pin: 27
+    name: "Ude PIR"
+    device_class: motion
