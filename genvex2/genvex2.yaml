@@ -54,6 +54,12 @@ sensor:
       accuracy_decimals: 0
       icon: "mdi:fan"
 
+  - platform: rpm_hw_sensor
+    rpm1:
+      name: test1
+    rpm2:
+      name: test2
+
 switch:
   - platform: gpio
     name: "Fan Power Relay"
